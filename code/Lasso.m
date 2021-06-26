@@ -6,8 +6,13 @@ percTn=75;
 [TnSetF, TnSetL, TtSetF, TtSetL]=SplitTrainTestSet(data,percTn);
 
 %LASSO
-lasso(TnSetF,TnSetL,'Alpha',0.5)
-
+[lasso_model,stats]=lasso(TnSetF,TnSetL,'Cv',10);
+%lassoPlot(lasso_model,stats,'PlotType','CV');
+Blasso=[lasso_model(:,stats.Index1SE)];
+size(TtSetF)
+size(Blasso)
+lasso_Predict=TtSetF*Blasso;
+mean((TtSetL - lasso_Predict).^2)
 
 
 function[TnSetF, TnSetL, TtSetF, TtSetL]=SplitTrainTestSet(Data,PercTn)
@@ -21,5 +26,5 @@ function[TnSetF, TnSetL, TtSetF, TtSetL]=SplitTrainTestSet(Data,PercTn)
     TnSetF=Feature(TnSamples,:); 
     TnSetL=Species(TnSamples,:); 
     TtSetF=Feature(TtSamples,:); 
-    TtSetL=Species(TtSamples,:); 
+    TtSetL=Species(TtSamples,:);
 end
