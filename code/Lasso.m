@@ -6,7 +6,7 @@ percTn=75;
 [TnSetF, TnSetL, TtSetF, TtSetL]=SplitTrainTestSet(data,percTn);
 
 %LASSO
-[lasso_model,stats]=lasso(TnSetF,TnSetL,'Cv',10);
+[lasso_model,stats]=lasso(TnSetF,TnSetL,'CV',10);
 %lassoPlot(lasso_model,stats,'PlotType','CV');
 Blasso=[lasso_model(:,stats.Index1SE)];
 size(TtSetF)
