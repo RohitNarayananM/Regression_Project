@@ -10,12 +10,17 @@ percTn=75;
 [TnSetF, TnSetL, TtSetF, TtSetL]=SplitTrainTestSet(data,percTn);
 
 %RIDGE
-l=1e-3;
+l=1e-3:1e:;
 Bridge=ridge(TnSetL,TnSetF,l);
-ridge_Predict=TtSetF*Bridge>0.5;
+ridge_Predict=TtSetF*Bridge;
 mse=mean((TtSetL - ridge_Predict).^2)
 mae=mean(TtSetL - ridge_Predict)
-confusionchart(logical(TtSetL),ridge_Predict);
+plot(l,Bridge,'LineWidth',2)
+ylim([-100 100])
+grid on 
+xlabel('Ridge Parameter') 
+ylabel('Standardized Coefficient') 
+title('Ridge Trace') 
 
 function[TnSetF, TnSetL, TtSetF, TtSetL]=SplitTrainTestSet(Data,PercTn)
     Feature=Data(:,3:14); 
