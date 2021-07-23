@@ -10,9 +10,9 @@ percTn=75;
 %lassoPlot(lasso_model,stats,'PlotType','Lambda','XScale','log');
 %lassoPlot(lasso_model,stats,'PlotType','CV');
 Blasso=[lasso_model(:,stats.Index1SE)];
-lasso_Predict=TtSetF*Blasso>0.5;
+lasso_Predict=TtSetF*Blasso;
 
-confusionchart(logical(TtSetL),lasso_Predict);
+confusionchart(logical(TtSetL),lasso_Predict>0.5);
 mse=mean((TtSetL - lasso_Predict).^2)
 mae=mean(TtSetL - lasso_Predict)
 %scatter(1:1:222, lasso_Predict)
