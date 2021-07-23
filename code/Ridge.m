@@ -14,7 +14,7 @@ l=1e-3;
 Bridge=ridge(TnSetL,TnSetF,l);
 ridge_Predict=TtSetF*Bridge;
 mse=mean((TtSetL - ridge_Predict).^2)
-m=sum((TtSetL - ridge_Predict)/length(TtSetL))
+mae=mean(TtSetL - ridge_Predict)
 
 
 function[TnSetF, TnSetL, TtSetF, TtSetL]=SplitTrainTestSet(Data,PercTn)
