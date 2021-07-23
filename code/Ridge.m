@@ -11,9 +11,11 @@ percTn=75;
 
 %RIDGE
 l=1e-3;
-Bridge=(TnSetF'* TnSetF + l*eye(N))\(TnSetF'*TnSetL);
-ridge_Predict=TtSetF*Bridge;
-mean((TtSetL - ridge_Predict).^2)
+BRidge=(TnSetF'* TnSetF + l*eye(N))\(TnSetF'*TnSetL);
+ridge_Predict=TtSetF*BRidge;
+mse=mean((TtSetL - ridge_Predict).^2)
+m=sum((TtSetL - ridge_Predict)/length(TtSetL))
+
 
 
 function[TnSetF, TnSetL, TtSetF, TtSetL]=SplitTrainTestSet(Data,PercTn)
