@@ -16,6 +16,8 @@ ridge_Predict=TtSetF*Bridge>0.5;
 mse=mean((TtSetL - ridge_Predict).^2)
 mae=mean(TtSetL - ridge_Predict)
 confusionchart(logical(TtSetL),ridge_Predict);
+title("Ridge")
+acc=sum(ridge_Predict==TtSetL)/length(ridge_Predict)
 
 function[TnSetF, TnSetL, TtSetF, TtSetL]=SplitTrainTestSet(Data,PercTn)
     Feature=Data(:,3:14); 
