@@ -7,19 +7,25 @@ percTn=75;
 
 %LASSO
 [lasso_model,stats]=lasso(TnSetF,TnSetL,'CV',10);
+%lassoPlot(lasso_model,stats,'PlotType','Lambda','XScale','log');
 %lassoPlot(lasso_model,stats,'PlotType','CV');
 Blasso=[lasso_model(:,stats.Index1SE)];
-size(TtSetF)
-size(Blasso)
-lasso_Predict=TtSetF*Blasso;
-mean((TtSetL - lasso_Predict).^2)
+lasso_Predict=TtSetF*Blasso>0.5;
+
+confusionchart(logical(TtSetL),lasso_Predict);
+mse=mean((TtSetL - lasso_Predict).^2)
+mae=mean(TtSetL - lasso_Predict)
+%scatter(1:1:222, lasso_Predict)
+%hold on;
+%scatter(1:1:222, TtSetL)
+%hold off;
 
 
 function[TnSetF, TnSetL, TtSetF, TtSetL]=SplitTrainTestSet(Data,PercTn)
-    Feature=Data(:,3:14); 
+    Feature=Data(:,3:14);
     Species=Data(:,2);
     TotalNumSamples=length(Species); 
-    NumTnSamp=ceil(TotalNumSamples*PercTn/100); 
+    NumTnSamp=ceil(TotalNumSamples*PercTn/100);
     Indx=randperm(TotalNumSamples); 
     TnSamples=Indx(1:NumTnSamp); 
     TtSamples=Indx(1+NumTnSamp:end); 

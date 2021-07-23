@@ -11,7 +11,7 @@ percTn=75;
 
 %RIDGE
 l=1e-3;
-Bridge=(TnSetF'* TnSetF + l*eye(N))\(TnSetF'*TnSetL);
+Bridge=ridge(TnSetL,TnSetF,l);
 ridge_Predict=TtSetF*Bridge;
 mean((TtSetL - ridge_Predict).^2)
 
