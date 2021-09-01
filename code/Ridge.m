@@ -1,4 +1,3 @@
-
 %,survived,age,sibsp,parch,fare,1,2,3,female,male,C,Q,S
 %ridge regression
 
@@ -31,4 +30,4 @@ function[TnSetF, TnSetL, TtSetF, TtSetL]=SplitTrainTestSet(Data,PercTn)
     TnSetL=Species(TnSamples,:); 
     TtSetF=Feature(TtSamples,:); 
     TtSetL=Species(TtSamples,:);
-end
+end% 

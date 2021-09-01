@@ -34,4 +34,4 @@ function[TnSetF, TnSetL, TtSetF, TtSetL]=SplitTrainTestSet(Data,PercTn)
     TnSetL=Species(TnSamples,:); 
     TtSetF=Feature(TtSamples,:); 
     TtSetL=Species(TtSamples,:);
-end
+end% 
